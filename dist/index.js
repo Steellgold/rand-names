@@ -217,22 +217,60 @@ function generateName(lang, nbrWords, categories) {
                 "Misterioso", "Culturale", "Panoramico", "Pittoresco", "Immersivo",
                 "Spontaneo", "Epico", "Inaspettato", "Ispirante", "Trasformativo"
             ]
-        }
+        },
+        animals: {
+            fr: [
+                "Lion", "Tigre", "Aigle", "Requin", "Loup", "Dauphin", "Éléphant", "Girafe",
+                "Gorille", "Jaguar", "Koala", "Léopard", "Lézard", "Lynx", "Morse", "Orque",
+                "Panda", "Phoque", "Renard", "Serpent", "Zèbre", "Crocodile", "Chameau", "Ours"
+            ],
+            en: [
+                "Lion", "Tiger", "Eagle", "Shark", "Wolf", "Dolphin", "Elephant", "Giraffe",
+                "Gorilla", "Jaguar", "Koala", "Leopard", "Lizard", "Lynx", "Walrus", "Orca",
+                "Panda", "Seal", "Fox", "Snake", "Zebra", "Crocodile", "Camel", "Bear"
+            ],
+            es: [
+                "León", "Tigre", "Águila", "Tiburón", "Lobo", "Delfín", "Elefante", "Jirafa",
+                "Gorila", "Jaguar", "Koala", "Leopardo", "Lagarto", "Lince", "Morsa", "Orca",
+                "Panda", "Foca", "Zorro", "Serpiente", "Cebra", "Cocodrilo", "Camello", "Oso"
+            ],
+            it: [
+                "Leone", "Tigre", "Aquila", "Squalo", "Lupo", "Delfino", "Elefante", "Giraffa",
+                "Gorilla", "Giaguaro", "Koala", "Leopardo", "Lucertola", "Lince", "Tricheco", "Orca",
+                "Panda", "Foca", "Volpe", "Serpente", "Zebra", "Coccodrillo", "Cammello", "Orso"
+            ]
+        },
+        professions: {
+            fr: ["Astronaute", "Architecte", "Chirurgien", "Pilote", "Photographe", "Detective", "Écrivain"],
+            en: ["Astronaut", "Architect", "Surgeon", "Pilot", "Photographer", "Detective", "Writer"],
+            es: ["Astronauta", "Arquitecto", "Cirujano", "Piloto", "Fotógrafo", "Detective", "Escritor"],
+            it: ["Astronauta", "Architetto", "Chirurgo", "Pilota", "Fotografo", "Detective", "Scrittore"]
+        },
+        colors: {
+            fr: ["Écarlate", "Émeraude", "Améthyste", "Cobalt", "Corail", "Électrique", "Bronze"],
+            en: ["Scarlet", "Emerald", "Amethyst", "Cobalt", "Coral", "Electric", "Bronze"],
+            es: ["Escarlata", "Esmeralda", "Amatista", "Cobalto", "Coral", "Eléctrico", "Bronce"],
+            it: ["Scarlatto", "Smeraldo", "Ametista", "Cobalto", "Corallo", "Elettrico", "Bronzo"]
+        },
     };
-    var randomLang = ["fr", "en", "es", "it"][Math.floor(Math.random() * 4)];
-    var chosenLang = lang || randomLang;
-    var availableCategories = categories.length > 0
-        ? categories
-        : Object.values(exports.CATEGORIES);
-    var getRandomTerm = function (category, lang) {
+    var languages;
+    if (typeof lang === "string")
+        languages = [lang];
+    else
+        languages = lang;
+    if (!languages.length)
+        languages = ["fr", "en", "es", "it"].slice();
+    var availableCategories = categories.length > 0 ? categories : Object.values(exports.CATEGORIES);
+    var getRandomTerm = function (category, langs) {
+        var randomLang = langs[Math.floor(Math.random() * langs.length)];
         // @ts-ignore
-        var options = terms[category][lang];
+        var options = terms[category][randomLang];
         return options[Math.floor(Math.random() * options.length)];
     };
     var nameParts = [];
     for (var i = 0; i < nbrWords; i++) {
         var category = availableCategories[Math.floor(Math.random() * availableCategories.length)];
-        nameParts.push(getRandomTerm(category, chosenLang));
+        nameParts.push(getRandomTerm(category, languages));
     }
     return nameParts.join("");
 }

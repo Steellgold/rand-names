@@ -9,5 +9,5 @@ export declare const CATEGORIES: {
     readonly travel: "travel";
 };
 export type Category = typeof CATEGORIES[keyof typeof CATEGORIES];
-export declare function generateName(lang?: string, nbrWords?: number, categories?: Category[]): string;
-export declare function generateMultipleNames(count?: number, lang?: string, nbrWords?: number, categories?: Category[]): string[];
+export declare function generateName(lang?: string | string[], nbrWords?: number, categories?: Category[]): string;
+export declare function generateMultipleNames(count?: number, lang?: string | string[], nbrWords?: number, categories?: Category[]): string[];

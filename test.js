@@ -1,4 +1,5 @@
 const { generateName, generateMultipleNames } = require("./dist/index");
 
-console.log("Pseudo aléatoire :", generateName("fr", 1, ["food"]));
-console.log("10 Pseudos aléatoires :", generateMultipleNames(10, "en", 3, ["food", "cars"]));
+console.log("Random name in French:", generateName("fr", 1, ["food"]));
+console.log("Random name in English and French:", generateName(["fr", "en"], 2, ["food"]));
+console.log("10 Random names:", generateMultipleNames(10, [], 3, ["food", "cars"]));

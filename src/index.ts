@@ -143,7 +143,7 @@ export function generateName(
       es: [
         "Deportivo", "Eléctrico", "Lujoso", "Compacto", "Robusto", 
         "Rápido", "Elegante", "Futurista", "Potente", "Ecológico",
-        "Clásico", "Innovador", "Cómodo", "De alto rendimiento", "Ágil"
+        "Clásico", "Innovador", "Cómodo", "De-alto-rendimiento", "Ágil"
       ],
       it: [
         "Sportivo", "Elettrico", "Lussuoso", "Compatto", "Robusto", 
