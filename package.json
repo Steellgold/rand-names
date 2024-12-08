@@ -1,0 +1,23 @@
+{
+  "name": "just-random-names",
+  "version": "1.0.1",
+  "description": "A simple package to generate random names in multiple languages",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "node test.js"
+  },
+  "keywords": [
+    "names",
+    "generator",
+    "multilingual",
+    "npm-package"
+  ],
+  "author": "Gaëtan H",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "typescript": "^5.7.2"
+  }
+}
