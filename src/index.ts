@@ -12,7 +12,7 @@ export const CATEGORIES = {
 export type Category = typeof CATEGORIES[keyof typeof CATEGORIES];
 
 export function generateName(
-  lang: string = "en",
+  lang: string | string[] = "en",
   nbrWords: number = 3,
   categories: Category[] = []
 ): string {
@@ -254,26 +254,27 @@ export function generateName(
     },
   };
 
-  const randomLang = (["fr", "en", "es", "it"] as const)[Math.floor(Math.random() * 4)];
-  const chosenLang = lang || randomLang;
+  let languages: string[];
 
-  const availableCategories = categories.length > 0 
-    ? categories 
-    : Object.values(CATEGORIES);
+  if (typeof lang === "string") languages = [lang];
+  else languages = lang;
 
-    const getRandomTerm = (category: Category, lang: string) => {
-      // @ts-ignore
-      const options = terms[category][lang as keyof typeof terms[category]];
-      return options[Math.floor(Math.random() * options.length)];
+  if (!languages.length) languages = (["fr", "en", "es", "it"] as const).slice();
+
+  const availableCategories = categories.length > 0 ? categories : Object.values(CATEGORIES);
+
+  const getRandomTerm = (category: Category, langs: string[]) => {
+    const randomLang = langs[Math.floor(Math.random() * langs.length)];
+
+    // @ts-ignore
+    const options = terms[category][randomLang as keyof typeof terms[category]];
+    return options[Math.floor(Math.random() * options.length)];
   };
 
   const nameParts: string[] = [];
   for (let i = 0; i < nbrWords; i++) {
-    const category = availableCategories[
-      Math.floor(Math.random() * availableCategories.length)
-    ];
-    
-    nameParts.push(getRandomTerm(category, chosenLang));
+    const category = availableCategories[Math.floor(Math.random() * availableCategories.length)];
+    nameParts.push(getRandomTerm(category, languages));
   }
 
   return nameParts.join("");
@@ -281,7 +282,7 @@ export function generateName(
 
 export function generateMultipleNames(
   count: number = 10,
-  lang: string = "en",
+  lang: string | string[] = "en",
   nbrWords: number = 3,
   categories: Category[] = []
 ): string[] {
