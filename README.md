@@ -1,12 +1,15 @@
 # Random Name Generator
 
-**Random Name Generator** is a simple and efficient package that generates multilingual pseudonyms by combining adjectives, nouns, and technical terms. It supports multiple languages and allows configuration of the number of words in pseudonyms.
+**Random Name Generator** is a simple and efficient package that generates multilingual pseudonyms by combining words from various categories like adjectives, nouns, tech terms, lifestyle, cars, food, sports, and travel. It supports multiple languages and allows configuration of the number of words in pseudonyms.
 
 ## Features
 
 - **Available Languages**: English (`en`), French (`fr`), Spanish (`es`), Italian (`it`).
-- **Dynamic Combinations**: Combines adjectives, nouns, and technical terms.
-- **Customizable**: Specify the number of words (`nbrWords`) or generate multiple names at once.
+- **Dynamic Combinations**: Combines words from multiple categories.
+- **Customizable**: 
+  - Specify the number of words (`nbrWords`)
+  - Generate multiple names at once
+  - Select specific word categories
 - **Multilingual Usage**: Easily switch between languages.
 
 ---
@@ -37,6 +40,10 @@ import { generateName } from "just-random-names";
 // Example: Generate a pseudonym in French with 3 words
 const pseudo = generateName("fr", 3);
 console.log(pseudo); // Example: "RapideDragonCodeur"
+
+// Example: Generate a pseudonym using only lifestyle and travel categories
+const specificPseudo = generateName("en", 2, [lifestyle, travel]);
+console.log(specificPseudo); // Example: "NomadEpic"
 ```
 
 ### 2. Generate Multiple Names
@@ -50,30 +57,48 @@ import { generateMultipleNames } from "just-random-names";
 const pseudos = generateMultipleNames(5, "en", 2);
 console.log(pseudos);
 // Example: [ "FastPenguin", "BrightDragon", "IcyFalcon", "WeirdOtter", "AgileCoder" ]
+
+// Example: Generate 3 pseudonyms using only tech and sports categories
+const techSportsPseudos = generateMultipleNames(3, "en", 2, [sports]);
+console.log(techSportsPseudos);
+// Example: [ "CoderAgile", "DebuggerPrecise", "APICompetitive" ]
 ```
 
 ---
 
 ## Parameters
 
-### `generateName(lang: string = "en", nbrWords: number = 3): string`
+### `generateName(lang: string = "en", nbrWords: number = 3, categories: Category[] = []): string`
 
-| Parameter  | Type     | Description                                                                                      |
-|------------|----------|--------------------------------------------------------------------------------------------------|
-| `lang`     | `string` | Language for the words: `"en"` (English), `"fr"` (French), `"es"` (Spanish), `"it"` (Italian).   |
-| `nbrWords` | `number` | Number of words in the pseudonym.                                                                |
+| Parameter    | Type       | Description                                                                                      |
+|--------------|------------|--------------------------------------------------------------------------------------------------|
+| `lang`       | `string`   | Language for the words: `"en"` (English), `"fr"` (French), `"es"` (Spanish), `"it"` (Italian).   |
+| `nbrWords`   | `number`   | Number of words in the pseudonym.                                                                |
+| `categories` | `Category[]`| Optional array of categories to use. If empty, uses all categories.                               |
 
 **Returns**: A string representing a unique pseudonym.
 
----
+### Available Categories
 
-### `generateMultipleNames(count: number = 10, lang: string = "en", nbrWords: number = 3): string[]`
+- `adjectives`
+- `nouns`
+- `techTerms`
+- `lifestyle`
+- `cars`
+- `food`
+- `sports`
+- `travel`
+- `animals`
+- `professions`
 
-| Parameter  | Type     | Description                                                                                      |
-|------------|----------|--------------------------------------------------------------------------------------------------|
-| `count`    | `number` | Number of pseudonyms to generate.                                                                |
-| `lang`     | `string` | Language for the words: `"en"` (English), `"fr"` (French), `"es"` (Spanish), `"it"` (Italian).   |
-| `nbrWords` | `number` | Number of words in each pseudonym.                                                               |
+### `generateMultipleNames(count: number = 10, lang: string = "en", nbrWords: number = 3, categories: Category[] = []): string[]`
+
+| Parameter    | Type       | Description                                                                                      |
+|--------------|------------|--------------------------------------------------------------------------------------------------|
+| `count`      | `number`   | Number of pseudonyms to generate.                                                                |
+| `lang`       | `string`   | Language for the words: `"en"` (English), `"fr"` (French), `"es"` (Spanish), `"it"` (Italian).   |
+| `nbrWords`   | `number`   | Number of words in each pseudonym.                                                               |
+| `categories` | `Category[]`| Optional array of categories to use. If empty, uses all categories.                               |
 
 **Returns**: An array containing multiple pseudonyms.
 
@@ -81,18 +106,18 @@ console.log(pseudos);
 
 ## Advanced Examples
 
-### Random Generation with Default Language
+### Random Generation with Default Language and Categories
 
 ```typescript
-const randomPseudo = generateName(); // Generates a pseudonym in English with 3 words
+const randomPseudo = generateName(); // Generates a pseudonym in English with 3 words from all categories
 console.log(randomPseudo); // Example: "BrightOtterAlgorithm"
 ```
 
-### Generation in Spanish with 4 Words
+### Generation in Spanish with Specific Categories
 
 ```typescript
-const pseudoEs = generateName("es", 4);
-console.log(pseudoEs); // Example: "MísticoZorroAlgoritmoPantera"
+const pseudoEs = generateName("es", 3, ["lifestyle", "travel"]);
+console.log(pseudoEs); // Example: "AventureroLejanoLibre"
 ```
 
 ---
